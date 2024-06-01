@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Box</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+    .custom-card {
+      border: 1px solid white;
+      background-color: black;
+      color: white;
+    }
+    .message-box {
+      border: 1px solid white;
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h1>Freedom Wall</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group">
+          <textarea id="messageInput" class="form-control message-box" rows="3" placeholder="Write your message here..."></textarea>
+        </div>
+        <button id="submitButton" class="btn btn-light btn-block">Submit</button>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6" id="messageContainer">
+        <!-- Message cards will appear here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#submitButton').click(function() {
+        var message = $('#messageInput').val();
+        if (message.trim() !== '') {
+          var card = `<div class="card custom-card mb-3">
+                        <div class="card-body">
+                          ${message}
+                        </div>
+                      </div>`;
+          $('#messageContainer').prepend(card);
+          $('#messageInput').val('');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
