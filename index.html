@@ -51,19 +51,40 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     $(document).ready(function() {
+      // Load messages from local storage
+      loadMessages();
+
       $('#submitButton').click(function() {
         var message = $('#messageInput').val();
         if (message.trim() !== '') {
-          var card = `<div class="card custom-card mb-3">
-                        <div class="card-body">
-                          ${message}
-                        </div>
-                      </div>`;
-          $('#messageContainer').prepend(card);
+          addMessage(message);
+          saveMessage(message);
           $('#messageInput').val('');
         }
       });
     });
+
+    function addMessage(message) {
+      var card = `<div class="card custom-card mb-3">
+                    <div class="card-body">
+                      ${message}
+                    </div>
+                  </div>`;
+      $('#messageContainer').prepend(card);
+    }
+
+    function saveMessage(message) {
+      let messages = JSON.parse(localStorage.getItem('messages')) || [];
+      messages.push(message);
+      localStorage.setItem('messages', JSON.stringify(messages));
+    }
+
+    function loadMessages() {
+      let messages = JSON.parse(localStorage.getItem('messages')) || [];
+      messages.forEach(function(message) {
+        addMessage(message);
+      });
+    }
   </script>
 </body>
 </html>
